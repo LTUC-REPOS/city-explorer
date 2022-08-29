@@ -1,21 +1,90 @@
-# Project Name
+# City Explorer
 
-**Author**: Your Name Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+<br><br>
+
+**Author**: Abdelrahman Alasal
+
+<br>
+
+**Version**: 1.0.0 
+
+<br>
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
+<br>
+
+> Searching for locations provided from user, using LocationIQ API's
+
+<br>
+
+<img src="./READIMG.png" width="350" title="hover text">
+
+<br>
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+<br>
+
+> Clone this Repo
+
+<br>
+
+> In terminal Run: __npm install__
+
+<br>
+
+> In terminal Run: __npm install axios__
+
+<br>
+
+> In terminal Run: __npm install react-bootstrap bootsrap__
+
+<br>
+
+> Create Account at __www.locationiq.com__ to get an __API TOKEN__
+
+<br>
+
+> Create .env File in your root directory and add the a variable inside it for the token: REACT_APP_API_TOKEN 
+
+<br>
+
+
+<br>
+
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+<br>
+
+> Its ReactJS based project 
+
+<br>
+
+> We are using Bootstrap for the styling
+
+<br>
+
+> We are using Axios to making requsts to the locationiq server 
+
+<br>
+
+> Components are Spreaded into 3 parts Header,Main,Footer , were Main contains Forms, DataCard, and Maps
+
+<br>
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+<br>
+
+> Finishing Static Maps Feature __2022-8-28 5:40PM__
+
+
+<br>
+
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+> Islam Alghoul 
+
