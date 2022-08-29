@@ -27,7 +27,7 @@ class WeatherDataCard extends Component {
         <div style={{ textAlign: "center", padding: 50 }}>
           <div
             style={{
-              width: "60%",
+              width: "65%",
               textAlign: "left",
             }}
           >
