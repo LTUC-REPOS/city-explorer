@@ -44,8 +44,7 @@ body {
   color: #ffff;
 }
 
-.headerCSS {
- 
+.headerCSS { 
 padding: 20px;
 background: rgb(3, 70, 72);
 display: flex;
