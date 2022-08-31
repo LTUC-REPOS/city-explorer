@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import Maps from "./Maps";
-import Form from "./Form";
-import WeatherForm from "./WeatherForm";
-import Error from "./Error";
-
-import ErrorWeather from "./ErrorWeather";
-
 import axios from "axios";
-import DataCard from "./DataCard";
-import WeatherDataCard from "./WeatherDataCard";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import MainLocation from "./LocationComponents/MainLocationComponent";
+import MainWeather from "./WeatherComponents/MainWeatherComponent";
+import MainMovies from "./MoviesComponents/MainMoviesComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -20,34 +16,36 @@ class Main extends Component {
       location: "",
       LocationError: "",
       WeatherError: "",
-      weather: null,
+      weatherData: null,
     };
   }
 
   getLocationData = async (location) => {
     let URL = `https://us1.locationiq.com/v1/search?`;
-
-    // Params
     let key = process.env.REACT_APP_API_TOKEN;
     URL += "key=" + key;
     let query = "&q=" + location;
     URL += query;
     let format = "&format=json";
     URL += format;
-    console.log(URL);
-    try {
-      let resResult = await axios.get(URL);
-      console.log(resResult);
-      this.setState({
-        display_name: resResult.data[0].display_name,
-        lat: resResult.data[0].lat,
-        lon: resResult.data[0].lon,
 
-        location: location,
-        LocationError: "",
+    try {
+      await axios.get(URL).then((res) => {
+        let resResult = res;
+        let lat = resResult.data[0].lat;
+        let lon = resResult.data[0].lon;
+        this.setState({
+          display_name: resResult.data[0].display_name,
+          lat: lat,
+          lon: lon,
+          location: location,
+          LocationError: "",
+          MoviesData: [],
+        });
+        this.getWeatherData(location, lat, lon);
+        this.getMovies(location);
       });
     } catch (e) {
-      console.log("err");
       this.setState({
         LocationError: e.message,
       });
@@ -63,15 +61,12 @@ class Main extends Component {
 
     console.log(URL);
     try {
-      let weatherResult = await axios.get(URL);
-      console.log(weatherResult);
-      let error = "";
-
-      if (weatherResult.data.error != undefined)
-        error = weatherResult.data.error + " " + weatherResult.data.code;
-      this.setState({
-        weather: weatherResult.data,
-        WeatherError: error,
+      await axios.get(URL).then((res) => {
+        let weatherResult = res;
+        this.setState({
+          weatherData: weatherResult.data,
+          WeatherError: "",
+        });
       });
     } catch (e) {
       console.log("err");
@@ -81,8 +76,43 @@ class Main extends Component {
     }
   };
 
+  getMovies = async (location) => {
+    let URL = process.env.REACT_APP_API_URL + "/movies?";
+    let query = "city=" + location;
+    URL += query;
+    console.log(URL);
+    try {
+      await axios.get(URL).then((res) => {
+        let moviesData = res;
+        this.setState({
+          MoviesData: moviesData.data,
+        });
+      });
+    } catch {
+      console.log("movies api error");
+    }
+  };
+
   render() {
     return (
+      <div>
+        <MainLocation submitHandler={this.getLocationData} Data={this.state} />
+        <div>
+          <MainWeather Data={this.state} />
+        </div>
+
+        <div>
+          <MainMovies Data={this.state} />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Main;
+
+/*
+
       <>
         <div>
           <div>
@@ -98,8 +128,5 @@ class Main extends Component {
           </div>
         </div>
       </>
-    );
-  }
-}
 
-export default Main;
+*/
