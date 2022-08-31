@@ -9,8 +9,8 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <div className="headerCSS" style={{ marginTop: 100 }}>
-          <h1>All rights reserved for LTUC 2022</h1>
+        <div className="footerCSS">
+          <h1>All rights reserved for Slow-Res</h1>
         </div>
       </>
     );
